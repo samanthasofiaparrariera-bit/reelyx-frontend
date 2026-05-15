@@ -1,0 +1,253 @@
+
+
+
+
+
+
+
+<!--RANKING SEMANAL-->
+<div class="section-title p-2 w-50 m-auto ">
+  <h3>Ranking semanal</h3>
+  <hr>
+</div>
+
+<div class=" rank-left container-fluid d-flex">
+
+  <div class=" position-relative w-50 ">
+    <div class="ranking-movies position-absolute p-4 bg-purple fw-bold">
+      <p class="color-white">1</p>
+    </div>
+    @if (pelis().length > 0) {
+      <!--    PELÍCULA PRIMER PUESTO (GRANDE)-->
+      <div class="bg-black opacity-75 rounded-3 d-flex gap-1 m-3 end-0 px-2 py-2 align-items-center position-absolute">
+        <i class="bi bi-star-fill color-purple"></i>
+        <span class="text-white fw-bold">{{ rankingGanador().rating }}</span>
+      </div>
+      <div class="position-absolute bottom-0 w-100 p-3 text-white">
+        <h3>{{ rankingGanador().name }}</h3>
+      </div>
+
+      <img [src]="getPeliculaImage(rankingGanador())"
+           class="rank-images img-fluid rounded w-100 h-100 d-block"
+           (click)="irFilmDetail(rankingGanador().name)">
+    }
+  </div>
+
+  <!--  PELÍCULAS 2-4-->
+
+  <div class="rank-right d-flex flex-column gap-3">
+
+    @for (peli of rankingpeliculas(); track peli.name; let i = $index) {
+
+      <div class="container position-relative">
+        <!-- Número del ranking, 1 + index porque vamos de 2 a 4-->
+        <div class=" ranking-movies position-absolute p-4 bg-purple fw-bold">
+          <p class="color-white">{{ i + 2 }}</p>
+        </div>
+
+        <!-- Rating-->
+        <div
+          class="bg-black opacity-75 rounded-3 d-flex gap-1 m-3 end-0 px-2 py-2 align-items-center position-absolute">
+          <i class="bi bi-star-fill color-purple"></i>
+          <span class="text-white fw-bold">{{ peli.rating }}</span>
+        </div>
+
+        <!-- titulo-->
+        <div class="position-absolute bottom-0 w-100 p-3 text-white">
+          <h3>{{ peli.name }}</h3>
+        </div>
+        <!-- imagen-->
+        <img [src]="getPeliculaImage(peli)"
+             class="rank-images img-fluid w-100 h-100 rounded d-block"
+             (click)="irFilmDetail(peli.name)">
+      </div>
+    }
+  </div>
+</div>
+
+<!--RECOMENDACIÓN DE HOY-->
+
+<div class="container-fluid position-relative w-75">
+  <div class="section-title p-2 m-auto mt-5">
+    <h3>La recomendación de hoy</h3>
+    <hr>
+  </div>
+
+  <div class="gap-2 d-flex">
+    @for (peli of recomendacionesHoy(); track peli.id) {
+      <div class="rec-movie-card d-flex gap-4">
+        <div class="l-side-card-rec">
+          <img [src]="getPeliculaImage(peli)"
+               class="tday-rec-img img-fluid rounded"
+               alt="">
+        </div>
+
+        <div class="r-side-card-rec">
+          <h5>
+            <a class="text-white text-decoration-none" (click)="irFilmDetail(peli.name)">
+              {{ peli.name }}
+            </a>
+          </h5>
+
+          <span>
+        {{ peli.year }} · {{ peli.genre === 'sci_fi' ? 'sci-fi' : peli.genre }} ·
+        <i class="bi bi-star-fill color-purple"></i>
+            {{ peli.rating }}
+      </span>
+
+          <p>{{ peli.sinopsis }}</p>
+        </div>
+      </div>
+    }
+  </div>
+
+</div>
+<!--REVIEWS RECIENTES-->
+<div>
+  <div class="section-title p-2 w-50 m-auto mb-3 ">
+    <h3>Reseñas recientes</h3>
+    <hr>
+  </div>
+
+  <div class="container my-4 d-flex gap-4 mb-4 justify-content-center">
+    @for (peli of pelis(); track peli.name; let i = $index) {
+      @if (i < 4) {
+        <div class="d-flex flex-column">
+          <div class="rec-card img">
+            <img [src]="getPeliculaImage(peli)" (click)="irFilmDetail(peli.name)">
+          </div>
+          <div>
+            <h4>{{ peli.name }}</h4>
+          </div>
+        </div>
+      }
+    }
+  </div>
+
+</div>
+
+
+<!--ctrl alt l-->
+<!--SIGN UP REMINDER-->
+@if (!usuarioLogeado()) {
+  <div>
+    <div class="reminder-card container m-auto mt-5 text-center">
+      <div>
+        <h3>Únete a nuestra comunidad para crear y compartir tus propias listas de películas</h3>
+        <h5>
+          Guarda tus películas favoritas, escribe reseñas y crea listas personalizadas para organizar todo lo que quieres ver.
+        </h5>
+
+        <button class="reminder-button fw-bold" routerLink="/register">
+          Registrarse
+          <i class="bi bi-arrow-right-square-fill"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+
+<!--featured reviews-->
+<!--3 cards per column-->
+<div>
+  <div class="section-title p-2 w-50 m-auto mt-5">
+    <h3>Reseñas destacadas</h3>
+    <hr>
+  </div>
+
+
+  <div class="container d-flex gap-3 flex-wrap p-2 justify-content-center">
+    @for (review of reviews(); track review.id; let i = $index) {
+      @if (i < 6) {
+
+        <div class="p-review-card container m-3">
+          <div class="d-flex gap-3">
+            <div class="rev-l-img m-3">
+              <img [src]="getReviewImage(review)" alt="" class="rev-l-img img-fluid rounded hazClick"
+                   (click)="irFilmDetail(review.name)">
+            </div>
+
+            <div class="rev-r-text">
+              <h5 (click)="irFilmDetail(review.name)" class="hazClick">
+                {{ review.name }}
+              </h5>
+
+              <div class="user-rating d-flex gap-3">
+                <img [src]="getUserImage(review)" alt="" class="user-rev-img img-fluid">
+
+                <div class="d-flex gap-1">
+                  <i class="bi bi-star-fill color-purple"></i>
+                  <span>{{ review.rating }}</span>
+                </div>
+              </div>
+              <p class="color-purple m-0">
+                Reseña de
+                <a class="name-redirect text-decoration-none color-white" (click)="irPerfil(review.email)">
+                  {{ review.nombre_user }}
+                </a>
+              </p>
+
+              <p>{{ review.texto }}</p>
+            </div>
+          </div>
+        </div>
+
+      }
+    }
+  </div>
+
+</div>
+
+
+<!--FEATURED REVIEWERS-->
+<div class="section-title p-2 w-50 m-auto mt-5">
+  <h3>Críticos destacados</h3>
+  <hr>
+</div>
+
+<div class="container d-flex gap-4">
+
+  @for (review of getReviewers(); track review.email) {
+
+    <div class="container pop-reviewers-card mt-5">
+      <div class="container justify-content-center">
+
+        <!--     PFP -->
+        <div class="m-auto" >
+          <img  [src]="getUserImage(review)" class="user-rev-img-pop img-fluid" (click)="irPerfil(review.email)" >
+        </div>
+
+        <div class="user-rev-info d-flex flex-column my-2">
+          <h5>
+            <a class="name-redirect text-decoration-none color-purple" (click)="irPerfil(review.email)">
+              {{ review.nombre_user }}
+            </a>
+          </h5>
+
+          <span>{{ getReviewsCount(review.email) }} reseñas</span>
+          <hr>
+        </div>
+        <!--   REVIEW -->
+        <div>
+          <span class="color-purple">Reseña destacada</span>
+
+          <h5 class="pop-rev-name" (click)="irFilmDetail(review.name)">
+            {{ review.name }}
+          </h5>
+
+          <div class="d-flex gap-1">
+            <i class="bi bi-star-fill color-purple"></i>
+            <span>{{ review.rating }}</span>
+          </div>
+
+          <p>{{ review.texto }}</p>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>
+
+

@@ -1,0 +1,137 @@
+@if (peli()) {
+  <div class="container text-white">
+    <div class="row">
+
+      <!--      IZQ-->
+      <div class="col-md-6">
+        <img [src]="peli().imagen" class="rank-images img-fluid rounded w-100 h-100 d-block" alt="">
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h5>Reviews</h5>
+            @if (reviewsDePeliculaSinLimite().length > 3) {
+              <button class="reviews-button" (click)="irReviewsPelicula()">
+                Ver más
+              </button>
+            }
+            @if (estaLogueado()) {
+              <button class="reviews-button" (click)="toggleReviewForm()">
+                Escribir reseña
+              </button>
+              @if (mostrarFormularioReview) {
+                <div class="review-form-box mt-3 p-3">
+
+                <textarea class="form-control" maxlength="1000"
+                          [(ngModel)]="textoReview" placeholder="Escribe tu reseña...">
+                </textarea>
+                  <input type="number" class="form-control mt-2" min="0" max="5" step="0.1"
+                         [(ngModel)]="ratingReview" placeholder="Puntuación">
+
+                  <button class="reviews-button mt-2" (click)="guardarReview()">
+                    Guardar reseña
+                  </button>
+
+                </div>
+              }
+            }
+
+
+        </div>
+
+        @if (reviewsPelicula().length > 0) {
+
+          @for (review of reviewsPelicula(); track review.id) {
+
+            <div class="film-review-card p-3 mt-3"
+                 (click)="irReviewsPelicula()">
+
+              <div class="d-flex gap-3 align-items-center">
+
+                <!-- PFP -->
+                <img [src]="getUserImage(review)"
+                     class="user-rev-img rounded-circle">
+
+                <div class="w-100">
+                  <!--  user -->
+                  <div class="d-flex justify-content-between align-items-center">
+
+                    <a class="review-user-link"
+                       (click)="irPerfil(review.email)">
+                      {{ review.nombre_user }}
+                    </a>
+
+                    <!--Estrellas-->
+                    <div class="d-flex gap-1">
+
+                      @for (star of [1, 2, 3, 4, 5]; track star) {
+
+                        @if (star <= review.rating) {
+                          <i class="bi bi-star-fill color-purple"></i>
+                        } @else {
+                          <i class="bi bi-star color-purple"></i>
+                        }
+                      }
+
+                    </div>
+
+                  </div>
+
+                  <!-- review -->
+                  <p class="mt-2 review-text">
+                    {{ review.texto }}
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          }
+
+        } @else {
+
+          <div class="empty-profile-seccion text-center p-4 mt-3">
+            <h5>Todavía no hay reviews</h5>
+            <p class="text-secondary">
+              Sé el primero en escribir una reseña.
+            </p>
+          </div>
+
+        }
+
+      </div>
+
+      <!--    Info de la peli-->
+      <div class="mt-4">
+        <h1>{{ peli().name }}</h1>
+
+        <div class="tag-section d-flex gap-3">
+          <span>{{ peli().year }}</span>
+          <span>{{ peli().genre }}</span>
+          <span>{{ peli().duration }}h</span>
+          <span>
+            <i class="bi bi-star-fill color-purple"></i>
+            {{ peli().rating }}
+          </span>
+        </div>
+
+        <hr>
+
+        <h5>Sinopsis</h5>
+
+        @if (peli().sinopsis) {
+          <p>{{ peli().sinopsis }}</p>
+        } @else {
+          <p class="text-secondary">Esta película todavía no tiene sinopsis...</p>
+        }
+      </div>
+
+    </div>
+  </div>
+
+} @else {
+  <p class="m-auto justify-content-center text-white">Pelicula no encontrada</p>
+}

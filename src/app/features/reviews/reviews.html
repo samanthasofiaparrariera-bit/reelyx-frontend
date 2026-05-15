@@ -1,0 +1,77 @@
+<div class="container text-white mt-5">
+
+  <div class="section-title p-2 w-50 m-auto color-purple">
+    <h3>Reviews</h3>
+    <hr>
+  </div>
+
+  <div class="reviews-container mt-4 row">
+
+    @if (reviews().length > 0) {
+      @for (review of reviewsLimitadas(); track review.id) {
+        <div class="col-md-6 ">
+        <div class="review-caja-card  p-4 mb-4"
+             (click)="irFilmDetail(review.name)">
+
+          <div class="d-flex gap-3 align-items-start">
+
+            <img [src]="getUserImage(review)"
+                 class="review-user-pfp rounded-circle"
+                 alt="User image">
+
+            <div class="w-100">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="m-0">{{ review.name }}</h5>
+                  <p class="text-secondary m-0">
+                    Reseña de {{ review.nombre_user }}
+                  </p>
+                </div>
+
+                <div class="d-flex gap-1">
+                  @for (star of [1,2,3,4,5]; track star) {
+                    @if (star <= review.rating) {
+                      <i class="bi bi-star-fill color-purple"></i>
+                    } @else {
+                      <i class="bi bi-star color-purple"></i>
+                    }
+                  }
+                </div>
+              </div>
+
+              <p class="mt-3 review-page-text">
+                {{ review.texto }}
+              </p>
+
+              <span class="review-year">
+                {{ review.year }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+        </div>
+      }
+      <div class="text-center mt-4">
+        @if (reviewsLimitadas < reviews().length) {
+
+          <button class="ver-mas-button" (click)="verMasReviews()">
+            Ver más
+          </button>
+        }
+       </div>
+
+    } @else {
+
+      <div class="empty-profile-seccion text-center p-4">
+        <h4>Todavía no hay reviews</h4>
+        <p class="text-secondary">Las reseñas aparecerán cuando los usuarios las publiquen.</p>
+      </div>
+
+    }
+
+  </div>
+
+</div>

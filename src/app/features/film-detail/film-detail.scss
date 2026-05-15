@@ -1,0 +1,105 @@
+
+.p-review-card {
+  width: 100%;
+  background: #2c282c;
+  border-style: solid;
+  border-color: #594959;
+  border-width: 2px;
+  padding: 10px;
+  border-radius: 15px;
+  justify-content: center;
+
+}
+.p-review-card:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  transition: all 0.5s;
+}
+
+.rev-l-img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.user-rev-img {
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.tag-section span{
+  padding:5px;
+  background: #3e333e;
+  border: 4px solid #3e333e;
+  border-radius: 9px;
+}
+
+// zona de reviews
+
+ .film-review-card {
+   background: #19141ee6;
+   border-radius: 16px;
+   cursor: pointer;
+   box-shadow: 0 0 12px rgba(157, 87, 216, 0.18);
+   transition: 0.15s ease;
+ }
+.film-review-card:hover {
+  box-shadow: 0 0 18px rgba(158, 88, 218, 0.35);
+}
+.review-text {
+  color: #cfcfcf;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.reviews-button {
+  background: #a05adc26;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: 0.15s;
+}
+.reviews-button:hover {
+  background: rgba(157, 89, 218, 0.3);
+}
+.user-rev-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
+//********
+.review-user-link {
+  color: #b66cff;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.review-user-link:hover {
+  color: #d1a6ff;
+}
+
+// Añadir review
+.review-form-box {
+  background: #19141e;
+  border-radius: 16px;
+  box-shadow: 0 0 14px #6f3fb8;
+  height: 160px;
+  max-height: 160px;
+  min-height: 160px;
+  resize: none;
+  overflow-y: auto;
+  color: #cacaca;
+  opacity: 1;
+}
+
+.review-form-box textarea,
+.review-form-box input {
+  background: #211a28;
+  color: #ffffff;
+  border: 1px solid #6f3fb8;
+  color: #ffffff;
+}

@@ -1,0 +1,149 @@
+<div class="container mt-5">
+
+  @if (profile()) {
+
+    <!-- PERFIL HEADER -->
+    <div class="profile-header container rounded-4 p-4 position-relative">
+
+      <!-- botón editar -->
+    @if (!esPerfilPublico) {
+      <button class="edit-profile-button position-absolute top-0 end-0 m-4 fw-bold"
+                (click)="modoEditar ? guardarPerfil() : toggleEditar()">
+        @if (!modoEditar) {
+          Editar perfil
+        } @else {
+          Guardar perfil
+        }
+      </button>
+    }
+
+      <div class="d-flex gap-4 align-items-center">
+
+        <!-- PFP -->
+        <div class="profile-img-container position-relative">
+          <img [src]="getProfileImage()" class="profile-img img-fluid rounded-circle" alt="">
+
+          @if (modoEditar) {
+            <label class="profile-img-hover rounded-circle d-flex align-items-center justify-content-center">
+              <span>Cambiar</span>
+              <input type="file" accept="image/*" hidden (change)="onFileSelected($event)">
+            </label>
+          }
+        </div>
+        <!--      DATOS USUARIO-->
+        <div class="profile-info text-white">
+
+          @if (!modoEditar) {
+            <h2>{{ profile().nombre }}</h2>
+            <p class="text-secondary">{{ profile().email }}</p>
+            <p>{{ profile().bio }}</p>
+          } @else {
+            <input type="text" class="form-control mb-2 profile-input" [(ngModel)]="profile().nombre">
+
+            <p class="text-secondary">{{ profile().email }}</p>
+            <textarea class="form-control profile-input" rows="3" [(ngModel)]="profile().bio"></textarea>
+          }
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- MIS LISTAS -->
+    <div class="section-title p-2 w-50 m-auto mt-5">
+      <h3>Mis listas</h3>
+      <hr>
+    </div>
+
+    <div class="container profile-section rounded-4 p-4">
+
+      @if (misListas().length > 0) {
+
+        <div class="d-flex gap-3 flex-wrap justify-content-center">
+
+          @for (lista of misListas(); track lista.id) {
+            <div class="profile-list-card rounded-4 p-3"
+                 (click)="irListDetail(lista.id)">
+              <div class="d-flex gap-2 mb-2">
+                @for (peli of lista.peliculas_detalle; track peli.id; let i = $index) {
+                  @if (i < 3) {
+                    <img [src]="getPeliculaImage(peli)"
+                         class="profile-list-img rounded"
+                         alt="">
+                  }
+                }
+              </div>
+              <h5>{{ lista.nombre }}</h5>
+              <p>{{ lista.descripcion || 'Sin descripción' }}</p>
+              <span>{{ lista.cantidad_peliculas }} películas</span>
+            </div>
+          }
+
+        </div>
+
+      } @else {
+
+        <div class="empty-profile-seccion text-center p-4">
+          <h4>Este usuario todavía no ha creado listas</h4>
+          <p class="text-secondary">Crea tu primera lista desde la pagina de películas.</p>
+        </div>
+
+      }
+
+    </div>
+
+    <!-- *********** -->
+      <!-- MIS REVIEWS -->
+      <!-- *********** -->
+
+    <div class="section-title p-2 w-50 m-auto mt-5">
+      <h3>Mis reviews</h3>
+      <hr>
+    </div>
+
+    <div class="container profile-section rounded-4 p-4 mb-5">
+
+      @if (misReviews().length > 0) {
+
+        <div class="d-flex gap-3 flex-wrap justify-content-center">
+
+          @for (review of misReviewsLimitadas(); track review.id) {
+            <div class="profile-review-card rounded-4 p-3 d-flex gap-3" (click)="irFilmDetail(review.name)">
+
+              <img [src]="getPeliculaImage(review)" class="profile-review-img rounded" alt="">
+
+              <div>
+                <h5>{{ review.name }}</h5>
+                <span class="color-purple fw-bold">
+                  <i class="bi bi-star-fill color-purple"></i>
+                  {{ review.rating }}
+                </span>
+                <p>{{ review.texto }}</p>
+              </div>
+
+            </div>
+          }
+
+        </div>
+        @if (misReviews().length > limiteReviews) {
+          <div class="text-center mt-3">
+            <button class="edit-profile-button fw-bold"
+                    (click)="verMasReviews()">
+              Ver más
+            </button>
+          </div>
+        }
+
+      } @else {
+        <div class="empty-profile-seccion text-center p-4">
+          <h4>Este usuario todavía no ha dejado ninguna reseña...</h4>
+
+          <p class="text-secondary">Las reseñas apareceran cuando sean publicadas.</p>
+        </div>
+
+      }
+
+    </div>  }
+
+</div>

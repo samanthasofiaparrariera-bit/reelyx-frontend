@@ -1,0 +1,46 @@
+<div class="layout">
+
+  <div class="left">
+    <img src="/moviestock1.jpg">
+  </div>
+
+  <div class="right">
+    <div class="login-box">
+
+      <div class="logo-box">
+        <img src="./logo2.png">
+      </div>
+
+      @if (!codigoEnviado) {
+
+        <h1>Create Account</h1>
+        <p>Track films. Rate stories. Build your taste.</p>
+
+        <form [formGroup]="registerForm">
+          <input type="text" formControlName="nombre" placeholder="Name">
+          <input type="email" formControlName="email" placeholder="E-mail address">
+          <input type="password" formControlName="password1" placeholder="Password">
+          <input type="password" formControlName="password2" placeholder="Confirm password">
+          <button type="button" (click)="register()">Create account</button>
+          <button type="button" routerLink="/login">Login</button>
+        </form>
+
+      }  @else {
+      <h1>Verifica tu cuenta</h1>
+      <p>Hemos enviado un código de 6 dígitos a <strong>{{ emailRegistrado }}</strong>. Por favor revísalo.</p>
+
+        <input type="text"
+               maxlength="6"
+               inputmode="numeric"
+               pattern="[0-9]*"
+               [(ngModel)]="codigoInput"
+               class="verify-input"
+               placeholder="Código de verificación">
+
+      <button class="btn-purple" (click)="verificarCodigo()">Verificar</button>
+    }
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,165 @@
+<!--  Filtro + buscador-->
+<div class="filter-wrap d-flex justify-content-center container m-auto">
+  <section class="browse-filter ">
+    <h3 class="color-purple mt-2">FILTER</h3>
+
+
+    <section class="f-menu-wrap d-flex gap-3">
+
+      <!--          year-->
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" (click)="toggleMenu('year')">
+          AÑO
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-dark" [ngClass]="dropdownOpen() === 'year' ? 'show' : ''">
+          @for (year of yearOptions; track year) {
+            <li>
+              <a class="dropdown-item text-capitalize" (click)="filterByYear(year)">
+                {{ year }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!--          genre-->
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" (click)="toggleMenu('genre')">
+          GENERO
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-dark"
+            [ngClass]="dropdownOpen() === 'genre' ? 'show' : ''">
+          @for (genre of genreOptions; track genre) {
+            <li>
+              <a class="dropdown-item text-capitalize" (click)="filterByGenre(genre)">
+                {{ genre === "sci_fi" ? "sci-fi" : genre }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!--          rating-->
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" (click)="toggleMenu('rating')">
+          CALIFICACIÓN
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-dark"
+            [ngClass]="dropdownOpen() === 'rating' ? 'show' : ''">
+          @for (rating of ratingOptions; track rating) {
+            <li>
+              <a class="dropdown-item text-capitalize" (click)="filterByRating(rating)">
+                {{ rating }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+
+      <!--          duration-->
+      <div class="dropdown">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" (click)="toggleMenu('duration')">
+          DURACIÓN
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" [ngClass]="dropdownOpen() === 'duration' ? 'show' : ''">
+          @for (dur of durationOptions; track dur) {
+            <li>
+              <a class="dropdown-item text-capitalize" (click)="filterByDuration(dur)">
+                {{ dur }}{{ dur !== 'all' ? 'h' : '' }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+    </section>
+
+
+  </section>
+
+  <!--  BUSCADOR-->
+  <div class="">
+    <fieldset class="find-film">
+      <div class="d-flex m-5 gap-2 ">
+        <label for="">BUSCAR</label> <!-- si no pongo el .value no me lee el texto-->
+        <input type="text" #searchQuery (input)="searchBar(searchQuery.value)" placeholder="Buscar...">
+      </div>
+    </fieldset>
+  </div>
+
+
+</div>
+
+<!--PeliculasService-->
+
+
+<div class=" container section-title p-2 w-75 m-auto mb-3 ">
+  <h3 class="color-purple mb-4">FILMS</h3>
+
+  <div class="d-flex gap-3 align-items-center">
+
+    <button class="btn btn-outline-light" (click)="resetFilter()">REINICIAR FILTRO</button>
+
+    <!--      Activa y desactiva el modo de selección-->
+    <button class="btn btn-outline-light" (click)="toggleModoLista()">
+      {{ confirmarLista }}
+    </button>
+
+    <!--      Muestra las peliculas que han sido seleccionadas siempre y cuando este en modo crear lista-->
+    @if (modoCrearLista()) {
+      <span class="ms-3">
+        Películas seleccionadas: {{ listasService.count() }}
+      </span>
+    }
+
+    <!--      Solo aparece este boton si estamos guardando algo -->
+    @if (modoCrearLista()) {
+      <button class="btn btn-success" (click)="guardarLista()">
+        Guardar lista
+      </button>
+    }
+  </div>
+  <hr>
+
+</div>
+
+
+<div class="container my-4 ">
+
+
+  <!--  medianas a grandes 4 columnas-->
+  <div class="row row-cols-md-4 ">
+    @for (peli of pelis(); track peli.name) {
+
+
+      <div class="col " [ngClass]="
+         (filterYear() !== 'all' && String(peli.year)!== filterYear()) ||
+         (filterGenre() !== 'all' && peli.genre !== filterGenre()) ||
+         (filterDuration() !== 'all' && String(peli.duration)!== filterDuration()) ||
+         (filterRating() !== 'all' && String(peli.rating) !== filterRating()) ||
+         !(peli.name.toLowerCase().includes(searchFilm().toLowerCase())) ? 'd-none' : '' ">
+
+        <div class="d-flex flex-column h-100">
+          <div class="rec-card img">
+
+            <img [src]="peli.imagen" class="img-fluid rounded-2 imgFilm" (click)="clickPelicula(peli)"
+                 [class.selected]="estaSeleccionada(peli)" [class.modo_lista]="modoCrearLista()">
+
+          </div>
+
+          <div>
+            <h4>{{ peli.name }}</h4>
+          </div>
+        </div>
+
+      </div>
+
+    }
+  </div>
+
+
+</div>

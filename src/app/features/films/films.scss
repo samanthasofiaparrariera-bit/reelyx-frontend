@@ -1,0 +1,74 @@
+
+h3{
+  margin-left: 20px;
+}
+.navbar-nav{
+  margin-left: 20px;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+
+
+.filter-wrap{
+  margin: 0px 140px;
+}
+.f-menu button{
+  background-color: #151315;
+  border: none;
+  color: #fff;
+}
+
+.f-menu{
+  position: relative;
+  display: inline-block;
+}
+
+
+//********
+//BUSCADOR
+//*********
+
+.find-film input{
+  background: transparent;
+  border: solid 1px #2c282c ;
+  border-radius: 4px;
+  color: white;
+}
+
+//********
+//FILM
+//*********
+
+
+.rec-card {
+  max-width: 260px;
+  aspect-ratio: 2 / 3;
+  margin: auto;
+
+  overflow: hidden;
+  border-radius: 14px;
+  position: relative;
+}
+
+.rec-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imgFilm {transition:transform .3s ease; cursor:  pointer;}
+
+.imgFilm.modo_lista:hover {
+  transform:scale(1.05);
+}
+.imgFilm.selected {
+  transform:scale(1.05);
+}
+
+//Añado scroll al deplegable de filtros
+select {
+  max-height: 180px;
+  overflow-y: auto;
+}

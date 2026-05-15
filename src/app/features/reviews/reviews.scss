@@ -1,0 +1,65 @@
+
+//************
+//Popular reviews
+//************
+.color-purple{
+  color: #bd7ff1;
+}
+.reviews-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.review-caja-card {
+  background: rgba(25, 20, 30, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 0 14px rgba(160, 90, 220, 0.22);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.review-caja-card:hover {
+  box-shadow: 0 4px 23px rgba(160, 90, 220, 0.4);
+
+}
+
+.review-user-pfp {
+  width: 55px;
+  height: 45px;
+  object-fit: cover;
+}
+
+.review-page-text {
+  color: #d0d0d0;
+  line-height: 1.5;
+}
+
+.review-year {
+  color: #b66cff;
+  font-weight: bold;
+}
+
+// BOTÓN DE VER MÁS
+.ver-mas-button {
+  background: transparent;
+  color: #b66cff;
+
+  border: 2px solid transparent;
+
+  padding: 10px 22px;
+
+  border-radius: 999px;
+
+  font-weight: bold;
+
+  transition: 0.15s;
+}
+
+.ver-mas-button:hover {
+  border: 2px solid #b66cff;
+}
+
+.ver-mas-button:active {
+  background: #b66cff;
+  color: white;
+}

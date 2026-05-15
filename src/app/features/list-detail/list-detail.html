@@ -1,0 +1,142 @@
+@if (lista()) {
+
+  <div class="container text-white mt-5 ">
+
+    <div class="list-detail-header rounded-4 p-4 " >
+
+      <div class="d-flex justify-content-between align-items-start">
+
+        <div class=" d-flex gap-3 align-items-center">
+
+          <img [src]="getUserImage(lista())" class="list-detail-pfp rounded-circle">
+
+          <div>
+
+            @if (!modoEditar) {
+
+              <h2>{{ lista().nombre }}</h2>
+
+            } @else {
+              <input type="text"class="form-control profile-input"
+                     [(ngModel)]="lista().nombre">
+
+            }
+
+            <span class="text-secondary">
+              Lista de {{ lista().usuario_nombre }}
+            </span>
+
+          </div>
+
+        </div>
+        <!-- *********** -->
+        <!-- BOTONES -->
+        <!-- *********** -->
+        <div class="d-flex gap-2">
+
+          @if (esDuenoLista()) {
+            <div class="d-flex gap-2">
+
+              @if (!modoEditar) {
+                <button class="edit-list-btn" (click)="activarEditar()">
+                  Editar
+                </button>
+
+
+              } @else {
+                <button class="save-list-btn" (click)="confirmarCambios()">
+                  Guardar cambios
+                </button>
+
+                <button class="cancel-list-btn" (click)="cancelarEditar()">
+                  Cancelar
+                </button>
+              }
+
+              <button class="delete-list-btn"
+                      (click)="eliminarLista()">
+                Eliminar
+              </button>
+
+            </div>
+          }
+
+
+        </div>
+
+      </div>
+
+      <!-- DESCRIPCION -->
+
+      <div class="mt-4">
+
+        @if (!modoEditar) {
+
+          <p class="list-description">
+            {{ lista().descripcion || 'Sin descripción' }}
+          </p>
+
+        } @else {
+
+          <textarea class="form-control profile-input" rows="4"
+                    [(ngModel)]="lista().descripcion">
+          </textarea>
+
+        }
+
+      </div>
+
+      <span class="color-purple fw-bold">
+        {{ peliculasEditadas.length }} películas
+      </span>
+
+    </div>
+
+    <!-- *********** -->
+    <!-- PELICULAS -->
+    <!-- *********** -->
+
+    <div class="row mt-5">
+
+      @for (peli of peliculasEditadas; track peli.id) {
+
+        <div class="col-md-3 mb-4">
+
+          <div class="list-detail-movie-card position-relative">
+
+            <!-- BORRAR PELI -->
+
+            @if (modoEditar) {
+
+              <button class="remove-movie-btn" (click)="quitarPelicula(peli.id)">
+                <i class="bi bi-x-lg"></i>
+              </button>
+
+            }
+
+            <img [src]="getPeliculaImage(peli)"class="img-fluid rounded movie-list-img"
+                 (click)="irFilmDetail(peli.name)"
+                 alt="">
+
+            <h5 class="mt-2">
+              {{ peli.name }}
+            </h5>
+
+            <span class="text-secondary">
+              {{ peli.year }}
+            </span>
+
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+
+} @else {
+
+  <div class="text-center text-white mt-5">
+    <h3>Lista no encontrada...</h3>
+  </div>
+
+}

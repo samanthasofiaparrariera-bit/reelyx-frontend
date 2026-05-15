@@ -1,0 +1,40 @@
+.lista-pfp {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+
+h3, hr{
+  color: #b360f3;
+}
+
+.list-peli-img {
+  width: 85px;
+  height: 125px;
+  object-fit: cover;
+}
+
+.list-movie-preview {
+  overflow: hidden;
+}
+
+.list-card {
+  background: #19141e;
+
+}
+.list-card:hover {
+  box-shadow: 0 0 16px #6f3fb8;
+  transition: ease-in-out 0.2s;
+}
+
+.list-description {
+  color: #cfcfcf;
+  min-height: 45px;
+}
+
+// a cambiar
+.name-redirect {
+  color: #b66cff;
+  text-decoration: none;
+  font-weight: bold;
+}

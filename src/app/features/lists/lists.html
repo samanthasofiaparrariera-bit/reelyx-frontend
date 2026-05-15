@@ -1,0 +1,78 @@
+<div class="container text-white mt-5">
+
+  <div class="section-title p-2 w-50 m-auto">
+    <h3>Listas recientes</h3>
+    <hr>
+  </div>
+
+<!--  solo se muestra si hay listas-->
+  @if (listas().length > 0) {
+
+    <div class="row mt-4">
+<!--recorremos todas las listas-->
+      @for (lista of listas(); track lista.id) {
+
+        <div class="col-md-6 mb-4">
+
+          <div class="list-card p-4 rounded-4 hazClick"
+               (click)="irListDetail(lista.id)">
+
+            <div class="d-flex gap-3 align-items-center mb-3">
+              <img [src]="getUserImage(lista)"
+                   class="lista-pfp rounded-circle"
+                   alt="">
+
+              <div>
+                <h4 class="m-0">{{ lista.nombre }}</h4>
+                <span class="text-secondary"> Lista de </span>
+                <a class="name-redirect" (click)="irPerfil(lista.email)" >
+                  {{ lista.usuario_nombre }}
+                </a>
+              </div>
+            </div>
+
+<!--            dejo texto en caso de q no haya una descripción-->
+            <p class="list-description">
+              {{ lista.descripcion || 'Sin descripción' }}
+            </p>
+
+            <div class="d-flex gap-2 list-movie-preview">
+
+              @for (peli of lista.peliculas_detalle; track peli.id; let i = $index) {
+                @if (i < 4) {
+                  <img [src]="getPeliculaImage(peli) "class="list-peli-img rounded">
+                }
+              }
+
+            </div>
+
+            <div class="mt-3 d-flex justify-content-between align-items-center">
+              <span class="color-purple fw-bold">
+                {{ lista.cantidad_peliculas }} películas
+              </span>
+
+              <a class="name-redirect"
+                 (click)="irListDetail(lista.id)">
+                Ver lista
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <div class="empty-profile-seccion text-center p-5 mt-4">
+      <h4>Todavía no hay listas creadas...</h4>
+      <p class="text-secondary">
+        ¡Crea una lista seleccionando películas desde la página de películas!
+      </p>
+    </div>
+
+  }
+</div>

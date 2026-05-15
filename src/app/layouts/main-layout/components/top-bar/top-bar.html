@@ -1,0 +1,53 @@
+<div class="topbar container-fluid text-white sticky-top">
+  <div class="d-flex align-items-center m-auto w-50">
+
+    <div class="d-flex align-items-center">
+      <a href="">
+        <img src="logo2.png" alt="" style="width: 90px;   object-fit: cover; ">
+      </a>
+    </div>
+
+    <div class="flex-grow-1 mx-5">
+      <div class="bg-secondary bg-opacity-25 rounded-5 px-3 py-1 text-secondary d-flex justify-content-between">
+        <input type="text" placeholder="Buscar..." class="search-input text-white">
+        <i class="bi bi-search"></i>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+      <a href="/films" class="text-white text-decoration-none">Películas</a>
+      <a href="/lists" class="text-white text-decoration-none">Listas</a>
+      <a href="/reviews" class="text-white text-decoration-none">Reseñas</a>
+      <div class="position-relative">
+        <button class="user-button text-white fs-5" (click)="toggleMenuUser()">
+          <i class="bi bi-person"></i>
+        </button>
+
+        @if (menuUser) {
+          <div class="user-menu">
+            <!--          Si le doy click al icono, togglemenuuser hace que menuUser sea true (visible)-->
+            @if (estaLogueado()) {
+
+              <!--          Tenemos 2 opciones, o le damos a perfil y nos lleva a profile-->
+              <button class="user-menu-option" (click)="irMiPerfil()">
+                Perfil
+              </button>
+              <!--              O le damos a logout y llamamos a la funciñon que elimina su token.-->
+              <button class="user-menu-option logout-option" (click)="logout()">
+                Salir
+              </button>
+
+            } @else {
+              <a routerLink="/login" class="login-option user-menu-option" (click)="toggleMenuUser()">
+                Iniciar sesión
+              </a>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--<router-outlet></router-outlet>-->
