@@ -85,7 +85,7 @@ export class PaginaPrincipal {
     }
 
 
-    return `http://localhost:8000${review.imagen}`;
+    return `https://reelyx-backend-9nic.onrender.com${review.imagen}`;
   }
 
   getPeliculaImage(pelicula: any) {
@@ -95,7 +95,7 @@ export class PaginaPrincipal {
     if (pelicula.imagen.startsWith('http')) {
       return pelicula.imagen;
     }
-    return `http://localhost:8000${pelicula.imagen}`;
+    return `https://reelyx-backend-9nic.onrender.com${pelicula.imagen}`;
   }
 
 
@@ -108,7 +108,7 @@ export class PaginaPrincipal {
       return review.pfp;
     }
 
-    return `http://localhost:8000${review.pfp}`;
+    return `https://reelyx-backend-9nic.onrender.com${review.pfp}`;
   }
 
   // Críticos destacados ***

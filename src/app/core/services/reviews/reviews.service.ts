@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReviewsService {
   private http = inject(HttpClient);
-  private API = 'http://localhost:8000/api/reviews';
+  private API = 'https://reelyx-backend-9nic.onrender.com/api/reviews';
 
   reviews = signal<any[]>([]);
 
@@ -32,7 +32,7 @@ export class ReviewsService {
   }
 
   crearReview(data: any) {
-    return this.http.post('http://localhost:8000/api/reviews/', data);
+    return this.http.post('https://reelyx-backend-9nic.onrender.com/api/reviews/', data);
   }
   recargarReviews() {
     this.reviews.set([]);

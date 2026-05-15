@@ -24,7 +24,7 @@ export class Lists {
     if (lista.usuario_pfp.startsWith('http')) {
       return lista.usuario_pfp;
     }
-    return `http://localhost:8000${lista.usuario_pfp}`;
+    return `https://reelyx-backend-9nic.onrender.com${lista.usuario_pfp}`;
   }
 
   getPeliculaImage(peli: any) {
@@ -36,7 +36,7 @@ export class Lists {
     }
 
 
-    return `http://localhost:8000${peli.imagen}`;
+    return `https://reelyx-backend-9nic.onrender.com${peli.imagen}`;
   }
 
   irPerfil(email: string) {

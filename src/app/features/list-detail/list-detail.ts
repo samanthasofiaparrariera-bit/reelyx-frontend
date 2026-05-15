@@ -188,7 +188,7 @@ export class ListDetail {
       return peli.imagen;
     }
 
-    return `http://localhost:8000${peli.imagen}`;
+    return `https://reelyx-backend-9nic.onrender.com${peli.imagen}`;
   }
 
   // PFP
@@ -202,7 +202,7 @@ export class ListDetail {
       return lista.usuario_pfp;
     }
 
-    return `http://localhost:8000${lista.usuario_pfp}`;
+    return `https://reelyx-backend-9nic.onrender.com${lista.usuario_pfp}`;
   }
 
 

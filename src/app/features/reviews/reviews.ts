@@ -35,7 +35,7 @@ export class Reviews {
       return review.pfp;
     }
 
-    return `http://localhost:8000${review.pfp}`;
+    return `https://reelyx-backend-9nic.onrender.com${review.pfp}`;
   }
 
   reviewsLimitadas() {

@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class PeliculasService {
 
   private http = inject(HttpClient);
-  private API = 'http://localhost:8000/api/peliculas';
+  private API = 'https://reelyx-backend-9nic.onrender.com/api/peliculas';
 
  // guardamos las peliculas de django en pelis
   pelis = signal<any[]>([]);

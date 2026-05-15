@@ -68,7 +68,7 @@ export class Profile {
       return peli.imagen;
     }
 
-    return `http://localhost:8000${peli.imagen}`;
+    return `https://reelyx-backend-9nic.onrender.com${peli.imagen}`;
   }
 
   // on off
@@ -88,7 +88,7 @@ export class Profile {
     if (user.image.startsWith('http')) {
       return user.image;
     }
-    return `http://localhost:8000${user.image}`;
+    return `https://reelyx-backend-9nic.onrender.com${user.image}`;
   }
 
   // Para que solo muestre mis reviews
@@ -172,7 +172,7 @@ export class Profile {
       }
     });
     // Enviamos los cambios del perfil al backend
-    this.http.put('http://localhost:8000/api/users/profile/', formData)
+    this.http.put('https://reelyx-backend-9nic.onrender.com/api/users/profile/', formData)
       .subscribe({
         next: (res: any) => {
           Swal.fire({

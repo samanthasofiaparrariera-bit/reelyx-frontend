@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileService {
 
   private http = inject(HttpClient);
-  private API = 'http://localhost:8000/api/users/profile';
+  private API = 'https://reelyx-backend-9nic.onrender.com/api/users/profile';
 
   profile = signal<any>(null);
 
@@ -25,7 +25,7 @@ export class ProfileService {
   //  diferencio perfiles publicos de personales
 
   cargarPerfilPublico(email: string) {
-    this.http.get(`http://localhost:8000/api/users/public-profile/${email}/`).subscribe({
+    this.http.get(`https://reelyx-backend-9nic.onrender.com/api/users/public-profile/${email}/`).subscribe({
       next: (response: any) => {
         console.log("PERFIL PUBLICO:", response);
         this.profile.set(response.data);

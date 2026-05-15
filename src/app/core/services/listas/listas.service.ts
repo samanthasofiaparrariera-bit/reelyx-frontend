@@ -9,7 +9,7 @@ export class ListasService {
 
   private KEY = 'lista_selection_id';
   private MAX = 30;
-  private API = 'http://localhost:8000/api/listas';
+  private API = 'https://reelyx-backend-9nic.onrender.com/api/listas';
   private idsSeleccionados = signal<string[]>([]);
   private http = inject(HttpClient);
   listas = signal<any[]>([]);

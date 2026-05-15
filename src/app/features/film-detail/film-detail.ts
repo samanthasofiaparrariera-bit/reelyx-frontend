@@ -64,7 +64,7 @@ export class FilmDetail {
 
 
 
-    return `http://localhost:8000${review.pfp}`;
+    return `https://reelyx-backend-9nic.onrender.com${review.pfp}`;
   }
   // navigate para perfil
   irPerfil(email: string) {
