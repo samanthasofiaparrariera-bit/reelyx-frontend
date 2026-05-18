@@ -13,16 +13,16 @@
 
       @if (!codigoEnviado) {
 
-        <h1>Create Account</h1>
-        <p>Track films. Rate stories. Build your taste.</p>
+        <h1>Crear cuenta</h1>
+        <p>Encuentra peliculas. Califica historias. Construye tus gustos.</p>
 
         <form [formGroup]="registerForm">
           <input type="text" formControlName="nombre" placeholder="Name">
-          <input type="email" formControlName="email" placeholder="E-mail address">
-          <input type="password" formControlName="password1" placeholder="Password">
-          <input type="password" formControlName="password2" placeholder="Confirm password">
-          <button type="button" (click)="register()">Create account</button>
-          <button type="button" routerLink="/login">Login</button>
+          <input type="email" formControlName="email" placeholder="Correo Electrónico">
+          <input type="password" formControlName="password1" placeholder="Contraseña">
+          <input type="password" formControlName="password2" placeholder="Confirmar contraseña">
+          <button type="button" (click)="register()">Crear cuenta</button>
+          <button type="button" routerLink="/login">Iniciar Sesión</button>
         </form>
 
       }  @else {
