@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reelyx Login</title>
+  <title>Reelyx - Inicio de sesión </title>
 </head>
 <body>
 <div class="layout">
@@ -19,15 +19,15 @@
         <img src="./logo2.png">
       </div>
 @if (esLogin){
-  <h1>Sign In</h1>
-  <p>Track films. Rate stories. Build your taste.</p>
+  <h1>Iniciar sesión</h1>
+  <p>Sigue peliculas. Califica historias. Construye tu gusto.</p>
 
   <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()" >
     <input type="email"  formControlName="email" placeholder="E-mail address">
     <input type="password" formControlName="password" placeholder="Password">
 
-    <button type="submit">Login</button>
-    <button type="button" routerLink="/register">Create account</button>
+    <button type="submit">Iniciar sesión</button>
+    <button type="button" routerLink="/register">Crear cuenta</button>
   </form>
 }
 
