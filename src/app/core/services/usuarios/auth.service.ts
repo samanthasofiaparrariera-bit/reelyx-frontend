@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 export class AuthService {
 
   private http = inject(HttpClient);
-  private API = 'http://127.0.0.1:8000/api/users';
+  private API = 'https://reelyx-backend-9nic.onrender.com ';
 
   registro(data:any){
     return this.http.post<any>(`${this.API}/register/`, data)
